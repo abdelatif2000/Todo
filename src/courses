@@ -1,0 +1,330 @@
+import './App.css';
+import    Footer from './components/Footer';
+import    Header from  './components/Header';
+import    Abde from   './components/Abde'
+import   {GetData} from './components/Abde'
+import {Route,BrowserRouter,NavLink}   from 'react-router-dom'
+import queryString_ from   'query-string'
+import  './App.css' ;
+import axios from 'axios'
+
+
+class App extends Component {
+   state={
+      ALLdata :[],
+      userId:"",
+      id:"",
+      title :""
+   }
+      componentDidMount() {
+         axios.get("https://jsonplaceholder.typicode.com/posts").then(Response=>{
+            this.setState({ALLdata:Response.data});
+            console.log(this.state.ALLdata);
+         })
+         .catch(erro =>console.log(erro))
+      
+      }
+      onchange_=(e)=>{
+         this.setState({
+           [e.target.name] :e.target.value
+         })
+      }
+      onSubmit_=(e)=>{
+         e.preventDefault();
+         console.log(this.state);
+         axios.post("https://jsonplaceholder.typicode.com/posts",this.state).then(data=>console.log(data))
+         .catch(error_=>console.log(error_));
+      }
+      render(){
+         return (
+          <div>
+                  <BrowserRouter>
+                 <NavBarList/>
+                  <Route path='/' exact component={Footer} />
+                  <Route path='/Header' exact component={Header}/>
+                  <Route path='/test' exact component={Abde}/>
+                  <Route  path='/ListItem' exact  component={ListItem}/>
+                  <Route  path='/ListItem/:id' exact component={ListItem} />
+                 </BrowserRouter> */
+                 <form onSubmit={this.onSubmit_}>
+                    <input  type='text' name='userId' onChange={this.onchange_}/>
+                    <input type="text" name='id' onChange={this.onchange_} />
+                    <input type="text" name='title' onChange={this.onchange_} />
+                    <input type="submit" />
+                 </form>
+          </div>
+        
+         )
+         }
+
+
+class NavBarList extends Component {
+   render() {
+      return (
+           <ul>
+              <li><NavLink to='/'>Footer Page</NavLink></li>
+              <li><NavLink to='/Header'>Header Pga e</NavLink></li>
+              <li><NavLink to='/test'>ABde Pga e</NavLink></li>
+              <li><NavLink to='/ListItem'>ListItem</NavLink></li>
+
+           </ul>
+      )
+   }
+}
+ class ListItem extends Component {
+    state={
+       items:[
+          {id:1,name:"item 1"},
+          {id:2,name:"item 2"},
+          {id:3,name:"item 3"}
+       ]
+    }
+   render() {
+      console.log(this.props)
+      return (
+         <div>
+               {this.state.items.map((item)=><NavLink to={'/ListItem/'+item.id} key={item.id}>{item.name}</NavLink>)}  
+               <Item item={this.props}/>
+         </div>
+      )
+   }
+}
+ class Item extends Component {
+   render() {
+      return (
+         <div>
+                 {'porst'+ this.props.item.match.params.id}      
+         </div>
+      )
+   }
+}
+
+1-litecycale methodes :
+      class : 
+    mounting (bealding) [constructor,getDerivedSatateFromProps(update state ), render,componentDidMount]
+    Updaing (upadet any thins in component) :[getDerivedSatateFromProps,shoundComponentUpdate,render,getSnapshotBeforeUpdate,componentDidUpdate];
+    unMounting() :[componentWillUnmount];
+2-key fragment :(remmove the parant of items)
+            <Fragment key='1'>
+            <li>item 1</li>  
+            <li>item 2</li>  
+            <li>item 3</li>  
+            </Fragment>
+ 3-pure Component :
+     pure component is when the event hapen but is not any update the render does't wotking : 
+4-HOC (higher order component ) :(highter order component use when the same methode or state repet in the components )  :
+            const HigherOrderComponent=(OriginComponent)=>{
+              return (
+                class newComponent extends Component {
+                    state={
+                          id:"1",
+                          name:"abdelatif",
+                        }
+                    onclick(){
+                        console.log("onclick");
+                    }
+                    render() {
+                        let  {name}=this.state;
+                        let id=this.state.id;
+                        return  ( <div>
+                          <OriginComponent 
+                              Name={name}
+                              myid={id}
+                              functionClick={this.onclick}
+                              {...this.props}
+                          />
+                        </div> 
+                          
+                          )
+                    }
+                }
+              )
+            }
+    5- render  props(render props is create un props in component but 
+       props isn't string or number but it's a function you can use it 
+       to take information from component to anather component) :  
+            <Header functionProps={(name,sendFucntion)=>{
+              return <Footer  name={name} Function_={sendFucntion}/>
+          }}></Header> 
+6- ref cullbackref(focus in input to reate) :
+      import  {createRef } from 'react';
+      Focusin =createRef();
+      componentDidMount() {
+         this.Focusin.current.focus();
+      }
+      render() {
+      return (
+            <div>
+               <h1>{this.props.name} </h1> 
+               <button onClick={this.props.Function_}>button Footer</button>
+               <input type="text" ref={this.createRef}></input>
+            </div>
+      )
+      }
+   7 - Context API :(this is use when you wante to send data to anader component but it is easy to use ) :
+     create for context :
+      import React from 'react';
+      const test=React.createContext();
+      const GetData=test.Provider
+      const SetData=test.Consumer;
+      export {GetData,SetData};
+         get data :
+         <GetData value={this.allfunction.} > 
+         </GetData>
+         send data :
+          <SetData>
+          {
+                 (mystate)=> {
+                     return mystate.name;
+                 }
+          }
+        </SetData>
+      8 - REAct router dom (BrowserRouter,Route,NavLink): you can use it for change between pages 
+
+            import {BrowserRouter,NavLink,Link}   from 'react-router-dom'   use need to install react-router-dom !!!
+            <BrowserRouter>
+            <Route path='/' exact component={Footer} />
+            <Route path='/Header' exact component={Header}/>
+            <Route path='/test' exact component={Abde}/>
+            <NavBarList/>
+         </BrowserRouter>
+         
+            <ul>
+            <li><NavLink to='/'>Footer Page</NavLink></li>
+            <li><NavLink to='/Header'>Header Pga e</NavLink></li>
+            <li><NavLink to='/test'>ABde Pga e</NavLink></li>
+            </ul>
+
+         // 9-Rout params :
+                <Route  path='/ListItem/:id' exact component={ListItem} />
+                {'porst'+ this.props.item.match.params.id}  
+    10 -how you can use ApI :           
+           import axios from 'axios'   !!!you need to install axios to use it 
+           axios.get("https://jsonplaceholder.typicode.com/posts").then(Response=>{
+            this.setState({ALLdata:Response.data});
+            console.log(this.state.ALLdata);
+          })
+          .catch(erro =>console.log(erro))
+        11- useState (state):
+         
+         import React, { useState,useEffect } from 'react'
+         const [products, setLaptop] = useState("laptop");
+
+
+         12-useEffect(componentDidMount,componentWillUpdate) :when component beald useEffect 
+         run and when update any thigns the use effect run :
+               import React, { useState,useEffect } from 'react';
+                   useEffect(()=>{
+                    console.log("us effect working " );
+                     },[name]);
+               
+        13-query string : 
+        import queryString from 'query-string'
+         console.log(queryString.parse(location.search));(object)
+         http://localhost:3000/Contact/50?qsds=sqdsf&sdsdf=sdfdsfv  
+
+       14-params :
+         http://localhost:3000/Contact/50
+         console.log(this.props.match.params);(value);
+
+         -----------------------------------------------------------------------
+  import React, { Component } from 'react'
+import {BrowserRouter,Link,NavLink,Route,Redirect,Switch}  from 'react-router-dom';
+import queryString from 'query-string'
+
+export default class App extends Component {
+   render() {
+    
+      return (
+         <div>
+          <BrowserRouter>
+       <Switch>
+       <Route path='/Contact'  exact component={Contact} />
+            <Route path='/'  exact render={(props)=>{ return <Home {...props} />}} />
+             <Route path='/not-found'   component={NoFound} />
+            <Redirect to="/not-found" />
+       </Switch>
+          </BrowserRouter>
+         </div>
+      )
+   }
+}
+
+
+ function NoFound() {
+   return (
+      <div>
+           <h1>NO-FOUND</h1>
+      </div>
+   )
+}
+
+ function Home(props) {
+    console.log(props)
+   return (
+      <div>
+           <h1>this is Home</h1>
+           <input type='button' onClick={()=>{}}  value='===>' />
+      </div>
+   )
+}
+function Contact(props) {
+  console.log(props);
+   return (
+      <div>
+           <h1>this is Contact</h1>
+           <input type='button' onClick={()=>{props.history.goBack()}}  value='<====' />
+      </div>
+   )
+}
+
+
+bootstrap react :
+import { Button,Form } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+    {/* <Form >
+                        <Form.Group color="white">
+                            <Form.Label>Name :</Form.Label>
+                            <Form.Control required type='text'></Form.Control>
+                        </Form.Group>
+
+                        <Form.Group>
+                            <Form.Label>Email :</Form.Label>
+                            <Form.Control required type='email'></Form.Control>
+                        </Form.Group>
+
+                        <Form.Group>
+                            <Form.Label>age :</Form.Label>
+                            <Form.Control required type='text'></Form.Control>
+                        </Form.Group>
+                        
+                        <Form.Group>
+                            <Form.Label>password :</Form.Label>
+                            <Form.Control required type='password'></Form.Control>
+                        </Form.Group> */}
+                  {/* </Form>  */}
+
+        ------------------------------------------------------------------
+//HOC :higher order component :  
+
+ function HooksComponent({lastName}) {
+     const [post, setpost] = useState({});
+     const [id, setid] = useState(1);
+     useEffect(() => {
+          axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`).then(Response=>setpost(Response.data)
+          ).catch(error_=>console.log(error_));
+     },[id]);
+
+    return (
+        <div>
+            <input type='text' onChange={(e)=>{setid(e.target.value)}} />
+            {post.id} - {post.title}
+        </div>
+    )
+} 
+export default HooksComponent ;
+
+
+
+              
+   

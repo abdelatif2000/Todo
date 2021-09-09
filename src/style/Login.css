@@ -1,0 +1,214 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: #1B2631;
+  }
+  
+  .box{
+    width: 300px;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: #191919;
+    text-align: center;
+    border-radius: 20px 20px;
+  }
+
+
+  .box h1{
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+    background: linear-gradient(
+      to right,
+      hsl(1 100% 50%),
+      hsl(100 100% 50%)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+  }
+  .box input[type = "email"],.box input[type = "password"] ,.box input[type = "text"] ,.box input[type = "number"],textarea ,.text_completed{
+    border:0;
+    background: none;
+    display: block;
+    margin: 5px auto;
+    text-align: center;
+    border: 2px solid #D4AC0D;
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.5s;
+  }
+  .box input[type = "email"]:focus,.box input[type = "number"]:focus,.box input[type = "password"]:focus ,.box input[type = "text"]:focus ,textarea:focus,.text_completed:focus{
+    border-color: #A04000;
+    width: 250px;
+  }
+ 
+  .box input[type = "email"]:hover,.box input[type = "number"]:hover,.box input[type = "password"]:hover ,.box input[type = "text"]:hover ,textarea:hover,.text_completed:hover {
+    border-color: #A04000;
+  }
+  .box input[type = "submit"] ,.btn_add{
+    border:0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #D4AC0D;
+    padding: 14px 40px;
+    outline: none;
+    color: white;
+    transition: 0.25s;
+    cursor: pointer;
+  }
+  .box input[type = "submit"]:focus, .btn_add:focus{
+    border-color: #D4AC0D;
+  }
+  .box input[type = "submit"]:hover,.addtask:hover ,.btn_add:hover{
+    background: #D4AC0D;
+    border-radius: 24px;
+  }
+  .modal-header .btn-close {
+    padding: .5rem .5rem;
+    margin: -.5rem -.5rem -.5rem auto;
+    border: 1px solid green;
+}
+  
+  a,.title_add {
+    font-family: "Dank Mono", ui-monospace, monospace;
+    background: linear-gradient(
+      to right,
+      hsl(98 100% 62%),
+      hsl(204 100% 59%)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+  }
+  #addtaskform{
+    width: 419px;
+  }
+  #addtasktext{
+    width:392px;
+  }
+  /* todos : */
+  table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  table caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+  }
+  
+  table tr {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
+  }
+  #Status{
+   
+  }
+  
+  table th,
+  table td {
+    padding: .625em;
+    text-align: center;
+  }
+  
+  table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  
+  @media screen and (max-width: 600px) {
+    table {
+      border: 0;
+    }
+    .modal-dialog {
+      position:relative;
+      top: 22%;
+      width: 90%;
+      left: 7px;
+    }
+    table caption {
+      font-size: 1.3em;
+    }
+    
+    table thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+    
+    table tr {
+      border-bottom: 3px solid #ddd;
+      display: block;
+      margin-bottom: .625em;
+    }
+    
+    table td {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      font-size: .8em;
+      text-align: right;
+    }
+    
+    table td::before {
+      /*
+      * aria-label has no advantage, it won't be read inside a table
+      content: attr(aria-label);
+      */
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+    table td:last-child {
+      border-bottom: 0;
+    }
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  /* general styling */
+  body {
+    font-family: "Open Sans", sans-serif;
+    line-height: 1.25;
+  }
+  #empty{
+    position: absolute;
+    transform: translate(-50%, -50%);
+    color: white;
+    top: 54%;
+    left: 48%;
+    font-size: 15px;
+  }

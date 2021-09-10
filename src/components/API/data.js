@@ -63,7 +63,7 @@ async function  UpdateTask (id){
   async function  UpdateTask_completed (id){
    const  url=`https://api-nodejs-todolist.herokuapp.com/task/${id._id}`;
               const data=await axios.put(url,{
-                  "completed" : id.completed
+                  "completed" : ! "completed"
                  },config
                  );
              return data;

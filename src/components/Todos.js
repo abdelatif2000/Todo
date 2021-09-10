@@ -49,7 +49,7 @@ export default class Todos extends Component {
         })
     }
     Completed_(){
-           UpdateTask_completed(this.state).then(e=>{
+           UpdateTask_completed(this.state).then(()=>{
                 this.componentDidMount();
             })
     }
@@ -119,7 +119,7 @@ export default class Todos extends Component {
                            }
                            }  type="button" className="btn btn-primary" update>Update</button> {" "}
                            <button onClick={()=>{
-                               this.setState({completed: ! this.state.completed,_id:item._id});
+                               this.setState({_id:item._id});
                                this.Completed_();
                            }} className="btn  btn-success">Mark {(! item.completed).toString()}</button>
                            </td>
